@@ -32,16 +32,16 @@ const Monitoring = () => {
       </View> */}
       <View style={styles.progressWrapper}>
         <AnimatedCircularProgress
-          size={200}
+          size={400}
           width={10}
-          fill={0}
+          fill={PAPER1}
           tintColor="#00e0ff"
           backgroundColor="#3d5875"
           style={styles.progressBar}
         >
           {
             (fill) => (
-              <Text style={styles.progressText}>{PAPER1}<Text></Text>
+              <Text style={styles.progressText}>Intermediate<Text></Text>
                 {`${Math.round(fill)}%`}
               </Text>
             )
@@ -49,32 +49,32 @@ const Monitoring = () => {
           
         </AnimatedCircularProgress>
         <AnimatedCircularProgress
-          size={200}
+          size={400}
           width={10}
-          fill={0}
+          fill={PAPER2}
           tintColor="#00e0ff"
           backgroundColor="#3d5875"
           style={styles.progressBar}
         >
           {
             (fill) => (
-              <Text style={styles.progressText}>{PAPER2} <Text></Text>
+              <Text style={styles.progressText}>Index<Text></Text>
                 {`${Math.round(fill)}%`}
               </Text> 
             )
           }
         </AnimatedCircularProgress>
         <AnimatedCircularProgress
-          size={200}
+          size={400}
           width={10}
-          fill={0}
+          fill={PAPER3}
           tintColor="#00e0ff"
           backgroundColor="#3d5875"
           style={styles.progressBar}
         >
           {
             (fill) => (
-              <Text style={styles.progressText}>{PAPER3} <Text></Text>
+              <Text style={styles.progressText}>Yellow <Text></Text>
                 {`${Math.round(fill)}%`}
               </Text>
             )
