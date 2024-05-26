@@ -1,7 +1,7 @@
 // Your web app's Firebase configuration
 
 import {initializeApp} from "firebase/app"
-import {getDatabase ,ref, onValue} from "firebase/datadbase"
+import {getDatabase ,ref, onValue} from "firebase/database"
 import "firebase/database";
 
 
