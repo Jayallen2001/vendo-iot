@@ -14,6 +14,16 @@ const Monitoring = () => {
   const [PAPER2, setPAPER2] = useState(10);
   const [PAPER3, setPAPER3] = useState(10);
 
+    useEffect (() => {
+      const data = ref(db);
+
+      onValue(data, (snapshot) =>{
+        setPAPER1(snapshot.val().PAPER1);
+        setPAPER2(snapshot.val().PAPER2);
+        setPAPER3(snapshot.val().PAPER3);
+      })
+
+    }, [db]);
   return (
     <ImageBackground source={bg1} style={styles.container} resizeMode="cover">
       <View style={styles.tempWrapper}>
