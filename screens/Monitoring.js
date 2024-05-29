@@ -1,35 +1,88 @@
 import { StyleSheet, Text, View, ImageBackground, Dimensions } from 'react-native';
-import {useEffect, useState} from 'react';
-
+import { useEffect, useState } from 'react';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 import bg1 from "../assets/bg1.jpg";
 
-import {db, ref, onValue} from "../firebase"
- 
+import { db, ref, onValue } from "../firebase";
+
 const { width, height } = Dimensions.get('window');
 
 const Monitoring = () => {
 
   const [PAPER1, setPAPER1] = useState(10);
   const [PAPER2, setPAPER2] = useState(10);
-  const [PAPER3, setPAPER3] = useState(10)
+  const [PAPER3, setPAPER3] = useState(10);
 
+    useEffect (() => {
+      const data = ref(db);
 
+      onValue(data, (snapshot) =>{
+        setPAPER1(snapshot.val().PAPER1);
+        setPAPER2(snapshot.val().PAPER2);
+        setPAPER3(snapshot.val().PAPER3);
+      })
+
+    }, [db]);
   return (
-    <ImageBackground source={bg1} style={styles.container}>
+    <ImageBackground source={bg1} style={styles.container} resizeMode="cover">
       <View style={styles.tempWrapper}>
         <Text style={styles.text}>
           PAPER VENDO MACHINE
         </Text>
       </View>
-      {/* <View style={styles.data}>
-        <View style={styles.spacer}></View>
-        <View style={styles.dataWrapper}>
-          <View style={styles.dataText}>
-          </View>
+      <View style={styles.centerWrapper}>
+        <View style={styles.progressWrapper}>
+          <AnimatedCircularProgress
+            size={150}
+            width={5}
+            fill={PAPER1}
+            tintColor="#00e0ff"
+            backgroundColor="#3d5875"
+            style={styles.progressBar}
+          >
+            {
+              (fill) => (
+                <Text style={styles.progressText}>Intermediate <Text></Text>
+                  {`${Math.round(fill)}%`}
+                </Text>
+              )
+            }
+          </AnimatedCircularProgress>
+          <AnimatedCircularProgress
+            size={150}
+            width={5}
+            fill={PAPER2}
+            tintColor="#00e0ff"
+            backgroundColor="#3d5875"
+            style={styles.progressBar}
+          >
+            {
+              (fill) => (
+                <Text style={styles.progressText}>Index<Text></Text>
+                  {`${Math.round(fill)}%`}
+                </Text> 
+              )
+            }
+          </AnimatedCircularProgress>
+          <AnimatedCircularProgress
+            size={150}
+            width={5}
+            fill={PAPER3}
+            tintColor="#00e0ff"
+            backgroundColor="#3d5875"
+            style={styles.progressBar}
+          >
+            {
+              (fill) => (
+                <Text style={styles.progressText}>Yellow <Text></Text>
+                  {`${Math.round(fill)}%`}
+                </Text>
+              )
+            }
+          </AnimatedCircularProgress>
         </View>
-      </View> */}
+      </View> */
       <View style={styles.progressWrapper}>
         <AnimatedCircularProgress
           size={400}
@@ -89,8 +142,9 @@ export default Monitoring;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    position: "relative",
     justifyContent: "center",
+    alignItems: "center", // Ensure content is centered horizontally
     width: width,
     height: height,
   },
@@ -99,54 +153,28 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   text: {
-    fontSize: width*0.1, // Make text size responsive
+    fontSize: width * 0.1, // Make text size responsive
     fontWeight: "100",
     textAlign: "center",
     color: "black",
     fontFamily: "Arial",
   },
-  data: {
-    flex: 1,
+  centerWrapper: {
+    flex: 2,
     justifyContent: "center",
     alignItems: "center",
-    width: "100%",
-  },
-  dataWrapper: {
-    backgroundColor: "rgba(255, 255, 255, 0.2)",
-    flexDirection: "row",
-    height: "50%",
-    justifyContent: "center",
-    alignItems: "center",
-    width: "20%",
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: "black",
-  },
-  dataText: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    fontSize: 50,
-    fontWeight: "bold",
-    textAlign: "center",
-    fontFamily: "Helvetica",
-  },
-  dataLabel: {
-    fontSize: 20,
-    color: "white",
   },
   progressWrapper: {
-    flex: 1,
     justifyContent: "space-around",
     alignItems: "center",
-    flexDirection: "row",
-    paddingBottom: "auto",
+    flexDirection: "column",
+    height: "100%",
   },
   progressBar: {
-    marginVertical: 10,
+    marginVertical: 20,
   },
   progressText: {
-    fontSize: 20,
+    fontSize: 15,
     color: "white",
   },
 });

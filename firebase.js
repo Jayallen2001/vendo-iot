@@ -11,7 +11,8 @@ const firebaseConfig = {
     projectId: "vendo-4fae1",
     storageBucket: "vendo-4fae1.appspot.com",
     messagingSenderId: "149448031756",
-    appId: "1:149448031756:web:de67cb0f4061b41cb0f829"
+    appId: "1:149448031756:web:de67cb0f4061b41cb0f829",
+    databaseURL: "https://vendo-4fae1-default-rtdb.asia-southeast1.firebasedatabase.app"
   };
 
 
